@@ -10,6 +10,9 @@ class LockIndicator:
         self.root.geometry("250x100")
         self.root.resizable(False, False)  # Prevent resizing
 
+        # Make window always on top
+        self.root.attributes('-topmost', True)
+
         self.x = 0  # For dragging the window
         self.y = 0  # For dragging the window
 
@@ -59,10 +62,6 @@ class LockIndicator:
         }
         self.colors = themes.get(self.theme, themes["light"])
 
-    def play_notification_sound(self):
-        """Play a notification sound."""
-        ctypes.windll.user32.MessageBeep(0x00000040)  # 0x00000040 is MB_ICONEXCLAMATION
-
     def update_lock_status(self):
         """Update the lock status labels and play a notification sound."""
         capslock_status = self.get_capslock_status()
@@ -70,11 +69,6 @@ class LockIndicator:
 
         caps_text = f"Caps Lock {'ON' if capslock_status else 'OFF'}"
         num_text = f"Num Lock {'ON' if numlock_status else 'OFF'}"
-
-        if self.caps_label.cget("text") != caps_text:
-            self.play_notification_sound()
-        if self.num_label.cget("text") != num_text:
-            self.play_notification_sound()
 
         self.caps_label.config(text=caps_text, bg=self.colors['bg'], fg=self.colors['fg'])
         self.num_label.config(text=num_text, bg=self.colors['bg'], fg=self.colors['fg'])
