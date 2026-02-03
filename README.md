@@ -25,7 +25,7 @@ I developed LockIndicator because my laptop does not have a built-in way to visu
 2. **Install Dependencies**:
    Ensure you have Python installed. Install the required packages using pip:
    ```bash
-   pip install pynput
+   pip install pynput pystray pillow
    ```
 
 ## Packaging with PyInstaller
